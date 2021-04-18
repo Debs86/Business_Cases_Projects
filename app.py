@@ -247,24 +247,14 @@ def frequent_time_prod(product, option):
 
 # ### Heatmap for the complementary products
 
-# In[17]:
 
-
-# Import order product dataset
-df_ord_prod = pd.read_csv(path +'order_products.csv', usecols=['order_id', 'product_id'])
-
-# Import product label mapping
-df_prod = pd.read_csv(path +'products.csv')
-
-# Merge product labels
-df_ord_prod = pd.merge(df_ord_prod, df_prod, how='left', on='product_id').    drop(["product_id", "department_id"], axis=1)
 
 
 # In[18]:
 
 
 # Pivot the data - lines as orders and products as columns
-pt = pd.pivot_table(df_ord_prod, index='order_id', columns='product_name', 
+pt = pd.pivot_table(df1, index='order_id', columns='product_name',
                     aggfunc=lambda x: 1 if len(x)>0 else 0).fillna(0)
 
 
