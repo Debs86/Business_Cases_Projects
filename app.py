@@ -55,7 +55,7 @@ path = 'https://raw.githubusercontent.com/Debs86/Business_Cases_Projects/master/
 orders = pd.read_csv(path +'orders.csv',sep=",")
 orders_prod = pd.read_csv(path +'order_products.csv',sep=",")
 departments = pd.read_csv(path +'departments.csv',sep=",")
-products = pd.read_csv('products.csv',sep=",")
+products = pd.read_csv(path +'products.csv',sep=",")
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
