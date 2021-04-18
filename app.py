@@ -51,9 +51,10 @@ import plotly.express as px
 
 
 #import dataset
-orders = pd.read_csv('orders.csv',sep=",")
-orders_prod = pd.read_csv('order_products.csv',sep=",")
-departments = pd.read_csv('departments.csv',sep=",")
+path = 'https://raw.githubusercontent.com/Debs86/Business_Cases_Projects/master/BC3/'
+orders = pd.read_csv(path +'orders.csv',sep=",")
+orders_prod = pd.read_csv(path +'order_products.csv',sep=",")
+departments = pd.read_csv(path +'departments.csv',sep=",")
 products = pd.read_csv('products.csv',sep=",")
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
@@ -250,10 +251,10 @@ def frequent_time_prod(product, option):
 
 
 # Import order product dataset
-df_ord_prod = pd.read_csv('order_products.csv', usecols=['order_id', 'product_id'])
+df_ord_prod = pd.read_csv(path +'order_products.csv', usecols=['order_id', 'product_id'])
 
 # Import product label mapping
-df_prod = pd.read_csv('products.csv')
+df_prod = pd.read_csv(path +'products.csv')
 
 # Merge product labels
 df_ord_prod = pd.merge(df_ord_prod, df_prod, how='left', on='product_id').    drop(["product_id", "department_id"], axis=1)
