@@ -618,5 +618,6 @@ def update_barplot_prod(product, option):
 # In[34]:
 
 
-if __name__ == '__main__': app.run_server(debug=True)
+if __name__ == '__main__':
+    app.run_server()
 
