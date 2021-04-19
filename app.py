@@ -28,15 +28,13 @@
 import pandas as pd
 import numpy as np
 import datetime as dt
-from mlxtend.frequent_patterns import apriori
-from mlxtend.frequent_patterns import association_rules
-import networkx as nx
+#from mlxtend.frequent_patterns import apriori
+#from mlxtend.frequent_patterns import association_rules
 import plotly.graph_objects as go
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_table
 from dash.dependencies import Input, Output
 import plotly.express as px
 
