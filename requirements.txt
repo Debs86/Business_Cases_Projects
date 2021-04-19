@@ -7,4 +7,3 @@ plotly
 datetime
 pandas
 numpy
-requests
