@@ -3,8 +3,8 @@
 import pandas as pd
 import numpy as np
 import datetime as dt
-#from mlxtend.frequent_patterns import apriori
-#from mlxtend.frequent_patterns import association_rules
+from mlxtend.frequent_patterns import apriori
+from mlxtend.frequent_patterns import association_rules
 import plotly.graph_objects as go
 import dash
 import dash_bootstrap_components as dbc
@@ -178,44 +178,44 @@ pt = pd.pivot_table(df1, index='order_id', columns='product_name',
                     aggfunc=lambda x: 1 if len(x)>0 else 0).fillna(0)
 
 # Create new support dataframe for two products only
-#frequent_itemsets_two = apriori(pt, min_support=0.03, use_colnames=True,  max_len = 2)
+frequent_itemsets_two = apriori(pt, min_support=0.03, use_colnames=True,  max_len = 2)
 
 # Compute association rules for frequent_itemsets
-#rulesConfidence_two = association_rules(frequent_itemsets_two, metric="confidence", min_threshold=0.50)
+rulesConfidence_two = association_rules(frequent_itemsets_two, metric="confidence", min_threshold=0.50)
 
 # High Confidence and high Lift - complementary products
-#complementary_p = rulesConfidence_two[(rulesConfidence_two['lift'] > 1.3)].sort_values('lift', ascending=False)
+complementary_p = rulesConfidence_two[(rulesConfidence_two['lift'] > 1.3)].sort_values('lift', ascending=False)
 
 
 # Create column with the number of the left hand side items
-#complementary_p['lhs items'] = complementary_p['antecedents'].apply(lambda x:len(x) )
+complementary_p['lhs items'] = complementary_p['antecedents'].apply(lambda x:len(x) )
 
 # Create column with the number of the right hand side items
-#complementary_p['rhs items'] = complementary_p['consequents'].apply(lambda x:len(x) )
+complementary_p['rhs items'] = complementary_p['consequents'].apply(lambda x:len(x) )
 
 # Replace frozen sets with strings
-#complementary_p['antecedents_'] = complementary_p['antecedents'].apply(lambda a: ','.join(list(a)))
-#complementary_p['consequents_'] = complementary_p['consequents'].apply(lambda a: ','.join(list(a)))
+complementary_p['antecedents_'] = complementary_p['antecedents'].apply(lambda a: ','.join(list(a)))
+complementary_p['consequents_'] = complementary_p['consequents'].apply(lambda a: ','.join(list(a)))
 
 # Transform the DataFrame of rules into a matrix using the lift metric
-#pivot = complementary_p.pivot(index = 'consequents_', columns = 'antecedents_', values= 'lift')
+pivot = complementary_p.pivot(index = 'consequents_', columns = 'antecedents_', values= 'lift')
 
 
 # divide the data
-#consequents = pivot.index.tolist()
-#antecedents = pivot.columns.tolist()
-#matrix = pivot.to_numpy()
+consequents = pivot.index.tolist()
+antecedents = pivot.columns.tolist()
+matrix = pivot.to_numpy()
 #Define the data to plot
-#data=go.Heatmap( x = antecedents, y = consequents, z = matrix, colorscale='YlOrRd')
+data=go.Heatmap( x = antecedents, y = consequents, z = matrix, colorscale='YlOrRd')
 #Define layout
-#layout = dict(title=dict(
-#                        text="Complementary Products - Lift"
-#                        ),
-#                  yaxis=dict(title="Consequents"),
-#                  xaxis=dict(title="Antecedents"),
-#                  title_x=0.5)
+layout = dict(title=dict(
+                        text="Complementary Products - Lift"
+                        ),
+                  yaxis=dict(title="Consequents"),
+                  xaxis=dict(title="Antecedents"),
+                  title_x=0.5)
 # create figure
-#fig_heatmap = go.Figure( data = data, layout = layout )
+fig_heatmap = go.Figure( data = data, layout = layout )
 
 
 # ### Creating the components
@@ -425,9 +425,9 @@ app.layout = html.Div([
                                  ], style=dict(display='flex', width = "100%")),
                 dcc.Graph(id='bar_plot_prod', style={"height": "50%", "width": "100%"})]),
             html.Hr([]),
-            #html.H4('Association Rules - Lift of complementary products'),
+            html.H4('Association Rules - Lift of complementary products'),
             html.Br([]),
-            #dcc.Graph(figure=fig_heatmap, style={"width": "100%"}),
+            dcc.Graph(figure=fig_heatmap, style={"width": "100%"}),
             dbc.CardHeader(html.H4('Departments participation')),
             html.Br([]),
             html.Div([
