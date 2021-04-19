@@ -30,11 +30,7 @@ import numpy as np
 import datetime as dt
 from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
-import matplotlib.pyplot as plt
 import networkx as nx
-import seaborn as sns
-import plotly.io as pio
-pio.renderers
 import plotly.graph_objects as go
 import dash
 import dash_bootstrap_components as dbc
